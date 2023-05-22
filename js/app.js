@@ -23,9 +23,22 @@ const validarInput = (event) => {
   const tipoInput = event.target.id;
 
   // validamos si el valor del input es vacio
-  (valorInput.trim() === '')
-    ? mostrarAlerta(event.target.parentElement, `El campo ${tipoInput} es obligatorio`)
-    : eliminarAlerta(event.target.parentElement)
+  if (valorInput.trim() === '') {
+    mostrarAlerta(event.target.parentElement, `El campo ${tipoInput} es obligatorio`);
+    return;
+  } else {
+    eliminarAlerta(event.target.parentElement);
+  }
+
+  // Validamos si el el tipo de input es email
+  if (tipoInput === 'email') {
+    const regex = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
+
+    // validamos el email
+    (!regex.test(valorInput))
+      ? mostrarAlerta(event.target.parentElement, `Email no valido`)
+      : eliminarAlerta(event.target.parentElement)
+  }
 
 };
 
