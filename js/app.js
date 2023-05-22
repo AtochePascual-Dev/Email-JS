@@ -51,6 +51,11 @@ const validarInput = (event) => {
 
   // Agregamos la informcion al objeto que contiene la informacion
   infoData[tipoInput] = valorInput;
+
+  // Validamos que el objeto contenga informcion en todas las propiedades
+  if (Object.values(infoData).every(data => data != '')) {
+
+  }
 };
 
 
