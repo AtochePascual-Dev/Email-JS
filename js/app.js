@@ -2,7 +2,8 @@
 const inputEmail = document.querySelector('#email');
 const inputAsunto = document.querySelector('#asunto');
 const inputMensaje = document.querySelector('#mensaje');
-const infoData = {
+const btnSubmit = document.querySelector('#formulario button[type="submit"]');
+const email = {
   email: '',
   asunto: '',
   mensaje: '',
@@ -28,12 +29,9 @@ const validarInput = (event) => {
 
   // validamos si el valor del input es vacio
   if (valorInput === '') {
-    mostrarAlerta(referencia, `El campo ${tipoInput} es obligatorio`);
+    mostrarAlerta(referencia, `El campo ${tipoInput} es obligatorio`, tipoInput);
     return;
   }
-
-  // Si pasa la validacion eliminamos la alerta
-  eliminarAlerta(referencia, tipoInput);
 
   // Validamos si el el tipo de input es email
   if (tipoInput === 'email') {
@@ -41,27 +39,30 @@ const validarInput = (event) => {
 
     // validamos el email
     if (!regex.test(valorInput)) {
-      mostrarAlerta(referencia, `Email no valido`);
+      mostrarAlerta(referencia, `Email no valido`, tipoInput);
       return;
     }
 
-    // Si pasa la validacion eliminamos la alerta
-    eliminarAlerta(referencia, tipoInput);
   }
 
-  // Agregamos la informcion al objeto que contiene la informacion
-  infoData[tipoInput] = valorInput;
+  // Si pasa la validacion eliminamos la alerta
+  eliminarAlerta(referencia, tipoInput);
 
-  // Validamos que el objeto contenga informcion en todas las propiedades
-  if (Object.values(infoData).every(data => data != '')) {
+  // Agregamos la informcion al objeto email
+  email[tipoInput] = valorInput;
 
+  // Validamos que el email contenga informcion en todas las propiedades
+  if (validarEmail()) {
+    activarBoton()
   }
 };
 
 
 
 //* Muestra una alerta
-const mostrarAlerta = (referencia, mensaje) => {
+const mostrarAlerta = (referencia, mensaje, tipoInput) => {
+
+  eliminarAlerta(referencia, tipoInput);
 
   // Creamos la alerta
   const alerta = document.createElement('P');
@@ -84,5 +85,33 @@ const eliminarAlerta = (referencia, tipoInput) => {
     existeAlert.remove();
   }
 
-  infoData[tipoInput] = "";
+  // Limpiamos la propiedad
+  email[tipoInput] = "";
+
+  // desactivamos el boton
+  desactivarBoton()
+
+};
+
+
+
+// * Validar email
+const validarEmail = () => {
+  // verifica si todos los campos son diferente de vacio
+  return Object.values(email).every(data => data != '');
+};
+
+
+
+// * Activar boton
+const activarBoton = () => {
+  btnSubmit.classList.remove('opacity-50');
+  btnSubmit.disablet = false;
+};
+
+
+// * Desactivar boton
+const desactivarBoton = () => {
+  btnSubmit.classList.add('opacity-50');
+  btnSubmit.disablet = true;
 };
