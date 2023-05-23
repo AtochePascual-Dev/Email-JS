@@ -107,11 +107,13 @@ const activarBoton = () => {
 };
 
 
+
 // * Desactivar boton
 const desactivarBoton = () => {
   btnSubmit.classList.add('opacity-50');
   btnSubmit.disabled = true;
 };
+
 
 
 // * Enviamos el email
@@ -133,6 +135,8 @@ const enviarEmail = (event) => {
   }, 2000);
 };
 
+
+
 // * Resetea el formulario
 const formularioReset = () => {
   email.email = '';
@@ -143,10 +147,14 @@ const formularioReset = () => {
   formulario.reset();
 };
 
+
+
 // * Limpia la propiedad del emai
 const limpiarEmail = (tipoInput) => {
   email[tipoInput] = '';
 };
+
+
 
 // *Validamos si el email del imput es correcto
 const validarEmailInput = (valorInput) => {
