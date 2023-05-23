@@ -2,8 +2,10 @@
 const inputEmail = document.querySelector('#email');
 const inputAsunto = document.querySelector('#asunto');
 const inputMensaje = document.querySelector('#mensaje');
+const formulario = document.querySelector('#formulario');
 const btnSubmit = document.querySelector('#formulario button[type="submit"]');
 const btnReset = document.querySelector('#formulario button[type="reset"]');
+const spinner = document.querySelector('#spinner');
 const email = {
   email: '',
   asunto: '',
@@ -16,6 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
   inputEmail.addEventListener('blur', validarInput);
   inputAsunto.addEventListener('blur', validarInput);
   inputMensaje.addEventListener('blur', validarInput);
+
+  formulario.addEventListener('submit', enviarEmail);
 
   btnReset.addEventListener('click', () => {
     email.email = '';
@@ -115,12 +119,36 @@ const validarEmail = () => {
 // * Activar boton
 const activarBoton = () => {
   btnSubmit.classList.remove('opacity-50');
-  btnSubmit.disablet = false;
+  btnSubmit.disabled = false;
 };
 
 
 // * Desactivar boton
 const desactivarBoton = () => {
   btnSubmit.classList.add('opacity-50');
-  btnSubmit.disablet = true;
+  btnSubmit.disabled = true;
+};
+
+
+// * Enviamos el email
+const enviarEmail = (event) => {
+  event.preventDefault();
+
+  // mostramos el spinner
+  spinner.classList.remove('hidden');
+  spinner.classList.add('flex');
+
+  // Eliminamos las classes que muestran el spiner
+  setTimeout(() => {
+    spinner.classList.add('hidden');
+    spinner.classList.remove('flex');
+
+    email.email = '';
+    email.asunto = '';
+    email.mensaje = '';
+
+    desactivarBoton();
+    formulario.reset();
+
+  }, 2000);
 };
