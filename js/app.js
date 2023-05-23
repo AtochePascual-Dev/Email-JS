@@ -3,6 +3,7 @@ const inputEmail = document.querySelector('#email');
 const inputAsunto = document.querySelector('#asunto');
 const inputMensaje = document.querySelector('#mensaje');
 const btnSubmit = document.querySelector('#formulario button[type="submit"]');
+const btnReset = document.querySelector('#formulario button[type="reset"]');
 const email = {
   email: '',
   asunto: '',
@@ -15,6 +16,14 @@ document.addEventListener('DOMContentLoaded', () => {
   inputEmail.addEventListener('blur', validarInput);
   inputAsunto.addEventListener('blur', validarInput);
   inputMensaje.addEventListener('blur', validarInput);
+
+  btnReset.addEventListener('click', () => {
+    email.email = '';
+    email.asunto = '';
+    email.mensaje = '';
+
+    desactivarBoton();
+  });
 });
 
 
@@ -53,7 +62,7 @@ const validarInput = (event) => {
 
   // Validamos que el email contenga informcion en todas las propiedades
   if (validarEmail()) {
-    activarBoton()
+    activarBoton();
   }
 };
 
