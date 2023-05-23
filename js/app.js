@@ -80,7 +80,7 @@ const mostrarAlerta = (referencia, mensaje, tipoInput) => {
   // Creamos la alerta
   const alerta = document.createElement('P');
   alerta.textContent = mensaje;
-  alerta.className = "p-2 bg-red-600 text-white text-center uppercase error"
+  alerta.className = "p-2 bg-red-600 text-white text-center uppercase text-sm font-bold error"
 
   // Agregamos la alerta al HTML
   referencia.appendChild(alerta);
@@ -149,6 +149,19 @@ const enviarEmail = (event) => {
 
     desactivarBoton();
     formulario.reset();
+
+    // Creamos un mesaje de exito
+    const alerta = document.createElement('P');
+    alerta.textContent = "Mensaje enviado correctamente";
+    alerta.className = "p-2 bg-green-500 text-white text-center uppercase text-sm font-bold alerta"
+
+    // Mostramos la alerta
+    formulario.appendChild(alerta);
+
+    // Eliminamos la alerta
+    setTimeout(() => {
+      formulario.querySelector('.alerta').remove();
+    }, 2000);
 
   }, 2000);
 };
